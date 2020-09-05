@@ -1,0 +1,27 @@
+---
+  - name: check vsftpd.conf status
+    stat: path=/etc/vsftpd.conf
+    register: conf_stat
+   
+  - name: bkp(copy) vsfptd.conf file
+    copy:
+      src: /etc/vsftpd.conf
+      dest: /etc/vsftpd.conf.orig
+      remote_src: yes
+      mode: 0755
+    when: conf_stat.stat.exists
+    notify:
+      - check vsftpd version
+
+  - name: configure vsftpd.config file 
+    copy:
+      src: vsftpd.conf
+      dest: /etc
+      mode: 0644 
+
+  - name: create an FTP user
+    user:
+      name: "{{ new_user }}"
+      password: "{{ user_pass }}"
+    notify:
+      - reload vsftpd

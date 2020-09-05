@@ -1,0 +1,10 @@
+---
+- name: install vsftpd
+  apt:
+    name: "vsftpd"
+    state: present
+    
+  notify:
+    - check vsftpd version
+    - enable vsftpd service
+    - reload vsftpd

@@ -1,0 +1,14 @@
+---
+# handlers file for vsftpd
+
+- name: check vsftpd version
+  debug:
+    shell: vsftpd -version
+  
+- name: enable vsftpd service
+  shell: systemctl enable vsftpd
+
+- name: reload vsftpd 
+  service:
+    name: vsftpd
+    state: reloaded
