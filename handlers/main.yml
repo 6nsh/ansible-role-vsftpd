@@ -2,8 +2,7 @@
 # handlers file for vsftpd
 
 - name: check vsftpd version
-  debug:
-    shell: vsftpd -version
+  shell: vsftpd -version
   
 - name: enable vsftpd service
   shell: systemctl enable vsftpd

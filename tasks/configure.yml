@@ -22,6 +22,6 @@
   - name: create an FTP user
     user:
       name: "{{ new_user }}"
-      password: "{{ user_pass }}"
+      password: "{{ 'password' | password_hash('sha512') }}"
     notify:
       - reload vsftpd
